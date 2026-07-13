@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oksana Pokutsa — Folk Minimalism</title>
+<meta content="I'm a Ukrainian artist living in Israel, and I work in Petrykivka — a folk painting tradition from Ukraine that UNESCO recognized as part of humanity's intangible cultural heritage." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Tenor+Sans&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --alba:   #FFF9EF; --alba2: #f5eddb; --alba3: #e8dcc8;
+    --ox:     #1D0000; --ox2:   #2e0505; --ox3:   #400808;
+    --rose:   #7a2020; --rose2: #a03030;
+    --ink:    #1a0505; --grey:  #8a7060;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--alba); color:var(--ink); font-family:'Tenor Sans',sans-serif; font-size:15px; line-height:1.7; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1rem 4rem; background:rgba(255,249,239,.97); backdrop-filter:blur(12px); border-bottom:1px solid var(--alba3); }
+  .nav-logo img { height:60px; width:auto; filter:brightness(0) sepia(1) saturate(2.8) hue-rotate(330deg) brightness(.18); }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a { font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; color:var(--grey); text-decoration:none; transition:color .3s; }
+  .nav-links a:hover { color:var(--ox); }
+
+  .hero { min-height:100vh; display:grid; grid-template-columns:1.1fr 0.9fr; padding-top:75px; }
+  .hero-left { background:var(--ox); display:flex; flex-direction:column; justify-content:flex-end; padding:5rem 4rem; position:relative; overflow:hidden; }
+  .hero-left::before { content:''; position:absolute; top:-60px; right:-60px; width:340px; height:340px; border-radius:50%;  }
+  .hero-tag   { font-size:.55rem; letter-spacing:.38em; text-transform:uppercase; color:var(--alba3); margin-bottom:1.5rem; opacity:0; animation:fadeUp 1s .3s forwards; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,4.5vw,5.2rem); font-weight:300; line-height:1.06; color:var(--alba); opacity:0; animation:fadeUp 1s .5s forwards; }
+  .hero-title em { font-style:italic; color:var(--rose2); }
+  .hero-sub   { margin-top:1.8rem; font-size:.82rem; color:rgba(255,249,239,.45); max-width:300px; opacity:0; animation:fadeUp 1s .7s forwards; line-height:1.8; }
+  .hero-cta   { margin-top:2.5rem; display:inline-flex; align-items:center; gap:1rem; font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--alba3); text-decoration:none; opacity:0; animation:fadeUp 1s .9s forwards; transition:gap .3s; border-bottom:1px solid rgba(255,249,239,.2); padding-bottom:.3rem; width:fit-content; }
+  .hero-cta:hover { gap:1.6rem; }
+  .hero-right { background:var(--alba); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .hero-right::before { content:''; position:absolute; bottom:70px; left:50px; width:110px; height:110px; border-radius:50%;  }
+  .hero-logo { opacity:0; animation:fadeUp 1.2s .8s forwards; }
+  .hero-logo img { width:360px; height:auto; filter:brightness(0) sepia(1) saturate(2.8) hue-rotate(330deg) brightness(.18); background:none; border:none; box-shadow:none; }
+
+  .divider { display:flex; align-items:center; gap:1.5rem; padding:0 4rem; }
+  .dl { flex:1; height:1px; background:var(--alba3); }
+  .dd { width:5px; height:5px; background:var(--rose); transform:rotate(45deg); flex-shrink:0; }
+
+  .about { padding:7rem 4rem; display:grid; grid-template-columns:1fr 2fr; gap:5rem; background:var(--alba); }
+  .about-label { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--rose); padding-top:.4rem; }
+  .about h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3vw,3rem); font-weight:300; line-height:1.2; margin-bottom:1.8rem; }
+  .about h2 em { font-style:italic; color:var(--rose); }
+  .about h3 { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:300; color:var(--ox); margin:2.1rem 0 .8rem; }
+  .about p { color:var(--grey); font-size:.88rem; max-width:520px; margin-bottom:1.2rem; }
+  .badges { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:2rem; }
+  .badge { padding:.35rem 1rem;  font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--grey); transition:all .3s; }
+  .badge:hover { border-color:var(--rose); color:var(--rose); }
+
+  .statement { background:var(--ox2); padding:6rem 4rem; position:relative; overflow:hidden; }
+  .statement-inner { max-width:700px; margin:0 auto; text-align:center; }
+  .sq { font-family:'Cormorant Garamond',serif; font-size:clamp(1.5rem,2.8vw,2.6rem); font-weight:300; font-style:italic; color:var(--alba); line-height:1.5; margin-bottom:2rem; }
+  .sq span { color:var(--rose2); }
+  .sa { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--alba3); opacity:.5; }
+  .unesco { display:inline-flex; align-items:center; gap:.75rem; margin-top:2.5rem; padding:.6rem 1.8rem;  font-size:.56rem; letter-spacing:.2em; text-transform:uppercase; color:var(--alba3); }
+
+  .works { padding:7rem 4rem; background:var(--alba2); }
+  .section-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:3.5rem; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,2.8vw,2.8rem); font-weight:300; }
+  .section-sub { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--grey); }
+
+  .works-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+  .work-item { position:relative; overflow:hidden; cursor:pointer; background:var(--alba3); }
+  .work-item::before { content:''; display:block; padding-top:100%; }
+  .work-item[style*="span 2"]::before { padding-top:52%; }
+  .work-item img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease; display:block; }
+  .work-item:hover img { transform:scale(1.04); }
+  .work-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(29,0,0,.88) 0%,transparent 55%); opacity:0; transition:opacity .4s; display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem; }
+  .work-item:hover .work-overlay { opacity:1; }
+  .wt { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--alba); }
+  .wm { font-size:.55rem; letter-spacing:.12em; text-transform:uppercase; color:var(--alba3); margin-top:.2rem; }
+
+  .series { padding:5rem 4rem; background:var(--alba); }
+  .series-grid { display:grid; grid-template-columns:repeat(4,1fr);  margin-top:3.5rem; }
+  .series-item { padding:2rem 1.6rem; border-right:1px solid var(--alba3); transition:background .3s; }
+  .series-item:last-child { border-right:none; }
+  .series-item:hover { background:var(--alba2); }
+  .sn { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; color:var(--alba3); line-height:1; margin-bottom:1.2rem; }
+  .sname { font-family:'Cormorant Garamond',serif; font-size:1.1rem; margin-bottom:.6rem; }
+  .sdesc { font-size:.72rem; color:var(--grey); line-height:1.6; }
+
+  .contact { padding:7rem 4rem; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; background:var(--alba2); }
+  .contact h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,4rem); font-weight:300; line-height:1.1; margin-bottom:1.5rem; }
+  .contact h2 em { font-style:italic; color:var(--rose); }
+  .contact > div > p { color:var(--grey); font-size:.85rem; max-width:380px; margin-bottom:2.5rem; }
+  .contact-links { display:flex; flex-direction:column; gap:1rem; }
+  .contact-link { display:flex; align-items:center; gap:1.2rem; text-decoration:none; color:var(--ink); font-size:.78rem; padding-bottom:1rem; border-bottom:1px solid var(--alba3); transition:color .3s; }
+  .contact-link:hover { color:var(--rose); }
+  .ci { width:36px; height:36px;  display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; transition:border-color .3s; }
+  .contact-link:hover .ci { border-color:var(--rose); }
+  .ccard { background:var(--ox); padding:3rem; position:relative; }
+  .ccard::before { content:''; position:absolute; top:-10px; left:-10px; right:10px; bottom:10px;  opacity:.2; z-index:-1; }
+  .ctag { font-size:.56rem; letter-spacing:.3em; text-transform:uppercase; color:var(--rose2); margin-bottom:1.5rem; }
+  .ccard h3 { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:300; color:var(--alba); margin-bottom:1rem; }
+  .ccard p { font-size:.78rem; color:rgba(255,249,239,.45); margin-bottom:2rem; line-height:1.8; }
+  .btn { display:inline-flex; align-items:center; gap:.8rem; padding:.85rem 2rem; background:var(--rose); color:var(--alba); font-size:.63rem; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; font-family:'Tenor Sans',sans-serif; transition:background .3s; }
+  .btn:hover { background:var(--rose2); }
+
+  footer { background:var(--ox); padding:3.5rem 4rem; display:grid; grid-template-columns:1fr 1fr 1fr; gap:3rem; border-top:1px solid rgba(255,249,239,.06); }
+  .fb { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; font-style:italic; color:var(--alba); margin-bottom:.5rem; }
+  .ft { font-size:.56rem; letter-spacing:.18em; color:var(--rose2); opacity:.5; }
+  .fct { font-size:.5rem; letter-spacing:.3em; text-transform:uppercase; color:var(--rose2); margin-bottom:1.2rem; }
+  .fl { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+  .fl a { font-size:.78rem; color:rgba(255,249,239,.35); text-decoration:none; transition:all .3s; }
+  .fl a:hover { color:var(--alba); }
+  .fc { grid-column:span 3; border-top:1px solid rgba(255,249,239,.06); padding-top:1.5rem; display:flex; justify-content:space-between; font-size:.56rem; color:rgba(255,249,239,.18); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .fade-in { opacity:0; transform:translateY(28px); transition:opacity .8s,transform .8s; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  @media(max-width:900px){
+    nav { padding:1rem 1.5rem; } .nav-links { display:none; }
+    .hero { grid-template-columns:1fr; } .hero-right { display:none; }
+    .hero-left { padding:7rem 2rem 4rem; min-height:100vh; }
+    .about,.works,.series,.contact { padding:4rem 2rem; }
+    .about { grid-template-columns:1fr; gap:2rem; }
+    .statement { padding:4rem 2rem; }
+    .works-grid { grid-template-columns:1fr 1fr; }
+    .work-item[style*="span 2"] { grid-column:span 2; }
+    .series-grid { grid-template-columns:1fr 1fr; }
+    .series-item { border-bottom:1px solid var(--alba3); }
+    .contact { grid-template-columns:1fr; gap:3rem; }
+    footer { grid-template-columns:1fr; gap:2rem; padding:3rem 2rem; }
+    .fc { grid-column:1; flex-direction:column; gap:.5rem; }
+    .divider { padding:0 2rem; }
+  }
+
+  .work-overlay .wm { color:var(--alba3); }
+  .works-grid .work-item { box-shadow:0 18px 45px rgba(29,0,0,.08); }
+  .works-grid .work-item img { object-position:center; }
+  @media(max-width:900px){
+    .work-item[style*="span 2"] { grid-column:span 2; }
+  }
+  @media(max-width:560px){
+    .works-grid { grid-template-columns:1fr; }
+    .work-item[style*="span 2"] { grid-column:span 1; }
+  }
+
+  .series-divider { padding:3.2rem 0 1.2rem; border-top:1px solid var(--alba3); margin-top:1.5rem; }
+  .series-divider:first-child { border-top:none; margin-top:0; padding-top:0; }
+  .series-kicker { font-size:.52rem; letter-spacing:.32em; text-transform:uppercase; color:var(--rose); margin-bottom:.6rem; }
+  .series-divider h3 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.55rem,2.4vw,2.45rem); font-weight:300; color:var(--ox); }
+  .wm { line-height:1.65; }
+  @media(max-width:560px){ .works-grid { grid-template-columns:1fr; } .work-item[style*="span 2"] { grid-column:span 1 !important; } .series-divider { padding-top:2.2rem; } }
+
+
+  /* Museum Portrait — small, quiet, gallery-style integration */
+  .hero-right-museum{
+    background:
+      radial-gradient(circle at 50% 42%, rgba(232,220,200,.72), rgba(255,249,239,.96) 46%, var(--alba) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-right-museum::before{
+    content:'';
+    position:absolute;
+    inset:8%;
+    border:1px solid rgba(232,220,200,.58);
+    pointer-events:none;
+  }
+
+  .museum-portrait-wrap{
+    width:min(360px, 68%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    opacity:0;
+    animation:fadeUp 1.15s .65s forwards;
+  }
+
+  .museum-portrait-frame{
+    width:100%;
+    background:rgba(255,249,239,.82);
+    padding:14px;
+    box-shadow:
+      0 26px 70px rgba(29,0,0,.11),
+      0 1px 0 rgba(255,255,255,.65) inset;
+  }
+
+  .museum-portrait-frame img{
+    width:100%;
+    aspect-ratio:4 / 5;
+    object-fit:cover;
+    object-position:center 16%;
+    display:block;
+    filter:brightness(.86) contrast(1.04) saturate(.9) sepia(.05);
+  }
+
+  .museum-portrait-caption{
+    margin-top:1.15rem;
+    font-size:.52rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:rgba(138,112,96,.75);
+    text-align:center;
+  }
+
+  @media(max-width:900px){
+    .hero-right-museum{
+      display:flex;
+      min-height:58vh;
+      padding:3rem 0;
+    }
+
+    .hero-right-museum::before{
+      inset:6%;
+    }
+
+    .museum-portrait-wrap{
+      width:min(310px, 76%);
+    }
+  }
+.artist-bio .recognition-panel {
+      padding:1.7rem 1.35rem;
+    }
+
+  /* Full-width horizontal artist bio tabs */
+  .about-full {
+    padding:7rem 4rem;
+    background:var(--alba);
+  }
+
+  .about-full-header {
+    max-width:980px;
+    margin:0 auto 3rem;
+    text-align:center;
+  }
+
+  .about-full-header .about-label {
+    margin-bottom:1rem;
+  }
+
+  .about-full-header h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,3.4vw,4rem);
+    font-weight:300;
+    line-height:1.12;
+  }
+
+  .about-full-header h2 em {
+    font-style:italic;
+    color:var(--rose);
+  }
+
+  .bio-tabs {
+    display:grid;
+    grid-template-columns:repeat(5, minmax(0, 1fr));
+    max-width:1180px;
+    margin:0 auto;
+    border:1px solid var(--alba3);
+    background:rgba(255,249,239,.6);
+  }
+
+  .bio-tab {
+    appearance:none;
+    border:0;
+    border-right:1px solid var(--alba3);
+    background:transparent;
+    padding:1.2rem 1rem;
+    font-family:'Tenor Sans',sans-serif;
+    font-size:.52rem;
+    letter-spacing:.17em;
+    text-transform:uppercase;
+    color:var(--grey);
+    cursor:pointer;
+    transition:all .32s ease;
+    text-align:center;
+    line-height:1.45;
+  }
+
+  .bio-tab:last-child {
+    border-right:none;
+  }
+
+  .bio-tab:hover,
+  .bio-tab.active {
+    background:var(--ox);
+    color:var(--alba);
+  }
+
+  .bio-panels {
+    max-width:1180px;
+    margin:0 auto;
+    min-height:330px;
+    background:
+      linear-gradient(135deg, rgba(245,237,219,.72), rgba(255,249,239,.72));
+    border:1px solid var(--alba3);
+    border-top:none;
+    box-shadow:0 24px 65px rgba(29,0,0,.055);
+  }
+
+  .bio-panel {
+    display:none;
+    max-width:840px;
+    margin:0 auto;
+    padding:3.4rem 2rem;
+    text-align:center;
+    animation:fadeUp .55s ease forwards;
+  }
+
+  .bio-panel.active {
+    display:block;
+  }
+
+  .bio-kicker {
+    font-size:.5rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--rose);
+    margin-bottom:.65rem;
+  }
+
+  .bio-panel h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.55rem,2.35vw,2.5rem);
+    font-weight:300;
+    color:var(--ox);
+    margin:0 0 1.3rem;
+  }
+
+  .bio-panel p {
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+    color:var(--grey);
+    font-size:.88rem;
+    line-height:1.8;
+  }
+
+  .bio-panel.recognition-panel {
+    background:
+      radial-gradient(circle at 50% 0%, rgba(160,48,48,.08), transparent 42%);
+    min-height:330px;
+  }
+
+  .about-full .badges {
+    max-width:1180px;
+    margin:2rem auto 0;
+    justify-content:center;
+  }
+
+  @media(max-width:900px){
+    .about-full {
+      padding:4rem 2rem;
+    }
+
+    .about-full-header {
+      text-align:left;
+      margin-bottom:2rem;
+    }
+
+    .bio-tabs {
+      grid-template-columns:1fr;
+    }
+
+    .bio-tab {
+      border-right:none;
+      border-bottom:1px solid var(--alba3);
+      text-align:left;
+      padding:1rem 1.2rem;
+    }
+
+    .bio-tab:last-child {
+      border-bottom:none;
+    }
+
+    .bio-panels {
+      min-height:auto;
+    }
+
+    .bio-panel {
+      padding:2.3rem 1.3rem;
+      text-align:left;
+    }
+
+    .bio-panel p {
+      margin-left:0;
+      margin-right:0;
+    }
+
+    .about-full .badges {
+      justify-content:flex-start;
+    }
+  }
+
+
+</style>
+<style>
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(8,5,4,.94);
+  padding:24px;
+}
+.lightbox.active{display:flex;}
+.lightbox-stage{
+  position:relative;
+  max-width:96vw;
+  max-height:94vh;
+  overflow:auto;
+  cursor:grab;
+}
+.lightbox-stage.zoomed{cursor:zoom-out;}
+.lightbox img{
+  display:block;
+  max-width:92vw;
+  max-height:90vh;
+  width:auto;
+  height:auto;
+  border-radius:10px;
+  box-shadow:0 28px 90px rgba(0,0,0,.65);
+  transition:transform .25s ease;
+  transform-origin:center center;
+  cursor:zoom-in;
+}
+.lightbox-stage.zoomed img{
+  max-width:none;
+  max-height:none;
+  transform:scale(1.75);
+  cursor:zoom-out;
+}
+.lightbox-close{
+  position:fixed;
+  top:18px;
+  right:28px;
+  z-index:1000000;
+  color:#FFF9EF;
+  font-size:44px;
+  line-height:1;
+  font-family:Arial,sans-serif;
+  cursor:pointer;
+  opacity:.9;
+}
+.lightbox-hint{
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  z-index:1000000;
+  color:rgba(255,249,239,.68);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.work-item, .work-item *{
+  cursor:zoom-in;
+}
+</style>
+</head>
+<body>
+<nav>
+<a class="nav-logo" href="#"><img alt="Oksana Pokutsa" src="images/logo-nav.jpg"/></a>
+<ul class="nav-links">
+<li><a href="#works">Works</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="hero-left">
+<div class="hero-tag">Contemporary Ukrainian Art</div>
+<h1 class="hero-title">Folk<br/><em>Minimalism</em></h1>
+<p class="hero-sub">My name is Oksana Pokutsa — a Ukrainian artist based in Israel, working in the tradition of Petrykivka, the historic Ukrainian folk painting practice recognized by UNESCO as part of humanity’s intangible cultural heritage.</p>
+<a class="hero-cta" href="#works">View Works →</a>
+</div>
+<div class="hero-right hero-right-museum">
+<div class="museum-portrait-wrap">
+<div class="museum-portrait-frame">
+<img alt="Oksana Pokutsa Portrait" src="images/portrait.jpg"/>
+</div>
+<div class="museum-portrait-caption">Oksana Pokutsa · Artist Portrait</div>
+</div>
+</div>
+</section>
+<div class="divider"><div class="dl"></div><div class="dd"></div><div class="dl"></div></div>
+<section class="about-full artist-bio bio-tabs-section" id="about">
+<div class="about-full-header fade-in">
+<div class="about-label">About</div>
+<h2>Oksana Pokutsa —<br/><em>between heritage and minimalism</em></h2>
+</div>
+<div aria-label="Artist biography sections" class="bio-tabs fade-in" role="tablist">
+<button class="bio-tab active" data-bio-tab="statement" type="button">01 · About</button>
+<button class="bio-tab" data-bio-tab="language" type="button">02 · Artistic Language</button>
+<button class="bio-tab" data-bio-tab="education" type="button">03 · Education</button>
+<button class="bio-tab" data-bio-tab="recognition" type="button">04 · Awards &amp; Recognition</button>
+<button class="bio-tab" data-bio-tab="collections" type="button">05 · Collections</button>
+</div>
+<div class="bio-panels fade-in">
+<article class="bio-panel active" data-bio-panel="statement">
+<div class="bio-kicker">01 · Artist Statement</div>
+<h3>Who I Am</h3>
+<p>My name is Oksana Pokutsa.</p>
+<p>I was born and raised in Ukraine, where I began studying Petrykivka painting from an early age — a decorative folk tradition built on flowers, birds, flowing ornament, and the visual memory of generations.</p>
+<p>When I emigrated to Israel, I carried this tradition with me — not as something preserved in the past, but as a living artistic practice capable of evolving, adapting, and speaking to the present.</p>
+</article>
+<article class="bio-panel" data-bio-panel="language">
+<div class="bio-kicker">02 · Artistic Language</div>
+<h3>What I Create</h3>
+<p>My work exists at the intersection of heritage and minimalism.</p>
+<p>Rooted in the visual rhythms of Petrykivka painting, I gradually developed my own artistic language, which I call Folk Minimalism.</p>
+<p>Traditional ornament is reduced, softened, and reimagined through textured contemporary surfaces — concrete, stone, plaster, and raw mineral finishes. Decorative forms become quieter, more restrained, and more architectural.</p>
+<p>My paintings are not reproductions of folklore. They are conversations with cultural memory.</p>
+</article>
+<article class="bio-panel" data-bio-panel="education">
+<div class="bio-kicker">03 · Education</div>
+<h3>Education &amp; Artistic Path</h3>
+<p>I received formal training in Petrykivka painting in Kyiv before continuing into higher education in art, design, and visual culture.</p>
+<p>I earned a Bachelor’s degree in Art &amp; Product Design and later completed a Master’s degree in Fashion Technology &amp; Design Management at the National University of Technologies and Design in Kyiv.</p>
+<p>After emigrating to Israel, I completed a teaching certification in Fine Arts at Oranim Academic College, accredited by the Israeli Ministry of Education.</p>
+</article>
+<article class="bio-panel recognition-panel" data-bio-panel="recognition">
+<div class="bio-kicker">04 · Awards, Exhibitions &amp; Certificates</div>
+<h3>Awards &amp; Recognition</h3>
+<p>In 2025, I was awarded 2nd Place at the Golden Time Talent International Art Competition in London, representing Israel in the painting category.</p>
+<p>In the same year, I received a Certificate of Distinction at the “Maccabiah-22” Regional Exhibition in the Haifa District, Israel.</p>
+<p>I also received a Certificate of Appreciation for participation in the “Mabat Le‑Rega” Exhibition — Teacher · Artist · Creator, held in the Haifa District, Israel.</p>
+</article>
+<article class="bio-panel" data-bio-panel="collections">
+<div class="bio-kicker">05 · Collections</div>
+<h3>Private Collections</h3>
+<p>Today, my works are held in private collections across Israel, Europe, and the United States.</p>
+</article>
+</div>
+<div class="badges fade-in">
+<span class="badge">Original paintings</span>
+<span class="badge">UNESCO Heritage</span>
+<span class="badge">Folk Minimalism</span>
+<span class="badge">Private collections</span>
+<span class="badge">Israel · Europe · USA</span>
+</div>
+</section>
+<section class="statement">
+<div class="statement-inner fade-in">
+<p class="sq">“Ancient ornament does not belong to the past —<br/>it belongs to <span>whoever dares to hold it differently.</span>”</p>
+<div class="sa">— Oksana Pokutsa</div>
+<div class="unesco">✦   Petrykivka — UNESCO Intangible Cultural Heritage</div>
+</div>
+</section>
+<section class="works" id="works">
+<div class="section-header fade-in">
+<h2 class="section-title">Selected Works</h2>
+<span class="section-sub">Original · Acrylic &amp; Mixed media</span>
+</div>
+<div class="works-grid">
+<div class="series-divider fade-in" style="grid-column:1/-1;">
+<div class="series-kicker">Series</div>
+<h3>Contemporary Petrykivka Geometry</h3>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Nocturne in Blue" loading="lazy" src="images/work-01-nocturne-in-blue.jpg"/>
+<div class="work-overlay">
+<div class="wt">Nocturne in Blue</div>
+<div class="wm">Contemporary Petrykivka Geometry · 60×60</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Grey Bloom Composition" loading="lazy" src="images/work-02-grey-bloom.jpg"/>
+<div class="work-overlay">
+<div class="wt">Grey Bloom Composition</div>
+<div class="wm">Contemporary Petrykivka Geometry · 50×60</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Feather Garden" loading="lazy" src="images/work-03-feather-garden.jpg"/>
+<div class="work-overlay">
+<div class="wt">Feather Garden</div>
+<div class="wm">Contemporary Petrykivka Geometry · 40×60</div>
+</div>
+</div>
+<div class="series-divider fade-in" style="grid-column:1/-1;">
+<div class="series-kicker">Series</div>
+<h3>Sunflower Geometry</h3>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Sunflower on Black" loading="lazy" src="images/work-04-sunflower-black.jpg"/>
+<div class="work-overlay">
+<div class="wt">Sunflower on Black</div>
+<div class="wm">Sunflower Geometry · 50×70</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Golden Vertical Garden" loading="lazy" src="images/work-05-golden-vertical-garden.jpg"/>
+<div class="work-overlay">
+<div class="wt">Golden Vertical Garden</div>
+<div class="wm">Sunflower Geometry · 40×60</div>
+</div>
+</div>
+<div class="series-divider fade-in" style="grid-column:1/-1;">
+<div class="series-kicker">Series</div>
+<h3>Soft Floral Abstraction</h3>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Crimson Silk Garden" loading="lazy" src="images/work-06-crimson-silk-garden.jpg"/>
+<div class="work-overlay">
+<div class="wt">Crimson Silk Garden</div>
+<div class="wm">Soft Floral Abstraction · 60×80</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Blue Air Flowers" loading="lazy" src="images/work-07-blue-air-flowers.jpg"/>
+<div class="work-overlay">
+<div class="wt">Blue Air Flowers</div>
+<div class="wm">Soft Floral Abstraction · 60×80</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Pastel Petal Field" loading="lazy" src="images/work-08-pastel-petal-field.jpg"/>
+<div class="work-overlay">
+<div class="wt">Pastel Petal Field</div>
+<div class="wm">Soft Floral Abstraction · 60×80</div>
+</div>
+</div>
+<div class="series-divider fade-in" style="grid-column:1/-1;">
+<div class="series-kicker">Series</div>
+<h3>Monochrome Relief</h3>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Silver Relief Border" loading="lazy" src="images/work-09-silver-relief-border.jpg"/>
+<div class="work-overlay">
+<div class="wt">Silver Relief Border</div>
+<div class="wm">Monochrome Relief · 50×70</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Black Relief Panel" loading="lazy" src="images/work-10-black-relief-panel.jpg"/>
+<div class="work-overlay">
+<div class="wt">Black Relief Panel</div>
+<div class="wm">Monochrome Relief · 60×70</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Twin Silver Panels" loading="lazy" src="images/work-11-twin-silver-panels.jpg"/>
+<div class="work-overlay">
+<div class="wt">Twin Silver Panels</div>
+<div class="wm">Monochrome Relief · 50×70</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Silver Vertical Ornament" loading="lazy" src="images/work-12-silver-vertical-ornament.jpg"/>
+<div class="work-overlay">
+<div class="wt">Silver Vertical Ornament</div>
+<div class="wm">Monochrome Relief · 40×70</div>
+</div>
+</div>
+<div class="series-divider fade-in" style="grid-column:1/-1;">
+<div class="series-kicker">Series</div>
+<h3>Dark Botanical Minimalism</h3>
+</div>
+<div class="work-item fade-in" style="grid-column:span 2;">
+<img alt="Oksana Pokutsa — Black Botanical Flow" loading="lazy" src="images/work-13-black-botanical-flow.jpg"/>
+<div class="work-overlay">
+<div class="wt">Black Botanical Flow</div>
+<div class="wm">Dark Botanical Minimalism · 90×70</div>
+</div>
+</div>
+<div class="work-item fade-in">
+<img alt="Oksana Pokutsa — Burgundy Night Bloom" loading="lazy" src="images/work-14-burgundy-night-bloom.jpg"/>
+<div class="work-overlay">
+<div class="wt">Burgundy Night Bloom</div>
+<div class="wm">Dark Botanical Minimalism · 70×90</div>
+</div>
+</div>
+</div>
+<div class="series-divider">
+<div class="series-kicker">Series</div>
+<h3>Jerusalem Dialogue</h3>
+<p style="max-width:760px;color:var(--grey);font-size:.86rem;line-height:1.85;margin-top:.9rem;margin-bottom:2rem;">
+    A contemporary dialogue between Ukrainian Petrykivka ornament and the cultural landscape of Israel.
+    Jerusalem architecture, sacred geometry, memory, and symbol meet the flowing rhythm of traditional folk painting —
+    creating works where two cultural identities speak through texture, restraint, and light.
+  </p>
+</div><div class="works-grid">
+<div class="work-item" style="grid-column:span 2;">
+<img alt="Jerusalem Memory High Quality" src="images/work-15-jerusalem-memory.jpg"/>
+<div class="work-overlay">
+<div class="wt">Jerusalem Memory</div>
+<div class="wm">90 × 70 cm · Acrylic on canvas</div>
+</div>
+</div>
+<div class="work-item">
+<img alt="Symbol &amp; Ornament" src="images/work-16-symbol-ornament.jpg"/>
+<div class="work-overlay">
+<div class="wt">Symbol &amp; Ornament</div>
+<div class="wm">60 × 60 cm · Mixed media</div>
+</div>
+</div>
+</div></section>
+<section class="contact" id="contact">
+<div class="fade-in">
+<h2>Let’s create<br/><em>something lasting</em></h2>
+<p>Original works are presented as a curated portfolio. For availability, purchases, or commissions for residential and corporate spaces, please contact the artist directly. International delivery is available with a certificate of authenticity.</p>
+<div class="contact-links">
+<a class="contact-link" href="mailto:opokutsa@gmail.com"><div class="ci">✉</div>opokutsa@gmail.com</a>
+<a class="contact-link" href="https://wa.me/972539213913" target="_blank"><div class="ci">☎</div>+972 53-921-3913  ·  WhatsApp</a>
+<span class="contact-link">◎ Israel · Artwork inquiries worldwide</span>
+</div>
+</div>
+<div class="fade-in">
+<div class="ccard">
+<div class="ctag">Commission a work</div>
+<h3>Your space,<br/>your story.</h3>
+<p>Every commission begins with a conversation. Tell me about the space, the feeling, the colours.</p>
+<a class="btn" href="mailto:opokutsa@gmail.com?subject=Artwork Availability Inquiry">Ask about availability →</a>
+</div>
+</div>
+</section>
+<footer>
+<div><div class="fb">Oksana Pokutsa</div><div class="ft">Folk Minimalism · Contemporary Ukrainian Art</div></div>
+<div><div class="fct">Navigate</div><ul class="fl"><li><a href="#works">Works</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+<div><div class="fct">Contact</div><ul class="fl"><li><a href="mailto:opokutsa@gmail.com">opokutsa@gmail.com</a></li><li><a href="https://wa.me/972539213913">WhatsApp</a></li></ul></div>
+<div class="fc"><span>© 2025 Oksana Pokutsa. All rights reserved.</span><span>Petrykivka · UNESCO Intangible Heritage</span></div>
+</footer>
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), {threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('.hero-left');
+    if(h && window.scrollY < window.innerHeight) h.style.transform='translateY('+(window.scrollY*.1)+'px)';
+  });
+</script>
+<div aria-hidden="true" class="lightbox" id="lightbox">
+<div class="lightbox-close" id="lightboxClose">×</div>
+<div class="lightbox-stage" id="lightboxStage">
+<img alt="" id="lightboxImg" src=""/>
+</div>
+<div class="lightbox-hint">Click image to zoom · Esc to close</div>
+</div>
+<script>
+(function(){
+  function ready(fn){
+    if(document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+
+  ready(function(){
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var stage = document.getElementById('lightboxStage');
+    var closeBtn = document.getElementById('lightboxClose');
+
+    if(!lightbox || !lightboxImg || !stage) return;
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden','false');
+      stage.classList.remove('zoomed');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden','true');
+      stage.classList.remove('zoomed');
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.work-item').forEach(function(item){
+      item.addEventListener('click', function(e){
+        var img = item.querySelector('img');
+        if(!img) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openLightbox(img.currentSrc || img.src, img.alt);
+      });
+    });
+
+    lightboxImg.addEventListener('click', function(e){
+      e.stopPropagation();
+      stage.classList.toggle('zoomed');
+    });
+
+    lightbox.addEventListener('click', closeLightbox);
+    closeBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeLightbox();
+    });
+  });
+})();
+</script>
+<script>
+  document.querySelectorAll('.bio-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var target = tab.getAttribute('data-bio-tab');
+
+      document.querySelectorAll('.bio-tab').forEach(function(item){
+        item.classList.remove('active');
+      });
+
+      document.querySelectorAll('.bio-panel').forEach(function(panel){
+        panel.classList.remove('active');
+      });
+
+      tab.classList.add('active');
+      var activePanel = document.querySelector('[data-bio-panel="' + target + '"]');
+      if(activePanel){
+        activePanel.classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>
